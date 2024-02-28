@@ -39,3 +39,44 @@ The purpose of Hermes is to enhance users' productivity by providing a user-frie
    ```bash
    git clone git@github.com:eduardoalsilva/Hermes.git
    cd Hermes
+   ```
+
+2. Create a virtual environment (optional but recommended):
+   ```bash
+   python -m venv venv
+   ```
+
+3. Activate the virtual environment:
+   - On Windows: `venv\Scripts\activate`
+   - On macOS/Linux: `source venv/bin/activate`
+
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Usage
+
+- Run the main application:
+  ```bash
+  python src/app.py
+  ```
+
+- Run tests:
+  ```bash
+  python -m unittest discover -s tests
+  ```
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the project.
+2. Create a new branch (`git checkout -b feature/my-feature`).
+3. Make your changes and commit them (`git commit -am 'Add my feature'`).
+4. Push to the branch (`git push origin feature/my-feature`).
+5. Open a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
