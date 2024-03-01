@@ -16,3 +16,13 @@ class Scheduler:
 
     def get_scheduled_events(self):
         return self.scheduled_events.copy()
+
+    def edit_event(self, old_title, new_title, new_date, new_time):
+        for event in self.scheduled_events:
+            if event['title'] == old_title:
+                event['title'] = new_title
+                event['date'] = new_date
+                event['time'] = new_time
+
+    def delete_event(self, title):
+        self.scheduled_events = [event for event in self.scheduled_events if event['title'] != title]
