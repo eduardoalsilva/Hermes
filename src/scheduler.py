@@ -26,3 +26,10 @@ class Scheduler:
 
     def delete_event(self, title):
         self.scheduled_events = [event for event in self.scheduled_events if event['title'] != title]
+
+    def set_reminder(self, title, minutes_before):
+        if event['title'] == title:
+            reminder_time = event['time'] - timedelta(minutes=minutes_before)
+
+            print(f'Reminder: The event "{event['title']}" will occur in {minutes_before} minutes, at {reminder_time}.')
+            
