@@ -26,7 +26,7 @@ def main():
             scheduler.schedule_event(title, date, time)
 
         elif choice == 2:
-            event = scheduler.get_scheduled_events()
+            events = scheduler.get_scheduled_events()
             if events:
                 print("\nScheduled Events:")
                 for event in events:
