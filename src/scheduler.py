@@ -51,6 +51,16 @@ class Scheduler:
         with sqlite3.connect(self.db_path) as conn:
             conn.execute('DELETE FROM events WHERE title=?', (title,))
 
+    def get_event_time(self, title):
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute('SELECT date, time FROM events WHERE title=?', (title,))
+            result = cursor.fetchone()
+            if result:
+                date, time = result
+                event_time = datetime.strptime(f"{date} {time}", "%Y-%m-%d %H:%M")
+                return event_time
+            return None
+
     def set_reminder(self, title, minutes_before):
         event = next((e for e in self.scheduled_events if e['title'] == title), None)
 
@@ -77,7 +87,7 @@ class Scheduler:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute('DELETE FROM events')
-            for event in self.schedule_events:
+            for event in self.schedule_event:
                 cursor.execute('INSERT INTO events VALUES (?, ?, ?)', (event['title'], event['date'], event['time']))
 
     def load_from_db(self):
