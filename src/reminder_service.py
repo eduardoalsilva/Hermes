@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from scheduler import Scheduler
+import time
 
 class ReminderService:
     @staticmethod
@@ -14,14 +15,17 @@ class ReminderService:
 
     @staticmethod
     def process_reminders(scheduler):
-        scheduled_events = Scheduler.get_scheduled_events()
+        while True:
+            scheduled_events = Scheduler.get_scheduled_events()
 
-        for event in scheduled_events:
-            if 'reminder' in event:
-                if datetime.now() >= event['reminder_time']:
-                    print(f"Reminder to '{event['title']}' sent!")
+            for event in scheduled_events:
+                if 'reminder' in event:
+                    if datetime.now() >= event['reminder_time']:
+                        print(f"Reminder to '{event['title']}' sent!")
 
-                    scheduler.remove_reminder(event['title'])
+                        scheduler.remove_reminder(event['title'])
 
-                else:
-                    print(f"Reminder to '{event['title']} scheduled to {event['reminder_time']}")
+                    else:
+                        print(f"Reminder to '{event['title']} scheduled to {event['reminder_time']}")
+                
+            time.sleep(60)
