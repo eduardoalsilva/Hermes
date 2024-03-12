@@ -6,6 +6,10 @@ def main():
     scheduler = Scheduler()
     reminder_service = ReminderService()
 
+    import threading
+    reminders_thread = threading.Thread(target=ReminderService.process_reminders, args=(scheduler,),daemon=True)
+    reminders_thread.start()
+
     while True:
         user_input = input("Enter a command: ")
 
@@ -27,7 +31,7 @@ def main():
 
         print(f"Event '{parsed_info['title']}' scheduled to {parsed_info['date']} at {parsed_info['time']} with reminder {parsed_info['reminder_minutes']} minutes before.")
 
-    ReminderService.process_reminders(scheduler)
+    reminders_thread.join()
         # print("\nHermes Assistant - Event Scheduler")
         # print("1. Schedule Event")
         # print("2. View Scheduled Events")
